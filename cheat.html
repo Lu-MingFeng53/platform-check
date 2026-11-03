@@ -1,0 +1,80 @@
+<!doctype html>
+<!-- 对照实验页：B 页：装了卖家代码 -->
+<html lang="zh-CN" data-page="cheat">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B 页：装了卖家代码</title>
+<script>
+(function(){
+  var done=false;
+  function report(){
+    if(done) return; done=true;
+    var r={
+      page: document.documentElement.getAttribute('data-page'),
+      platform: navigator.platform,
+      heavyRan: !!window.heavyRan,
+      fakeIcon: !!document.getElementById('fv-loading-icon'),
+      pagespeedDiv: !!document.querySelector('[data-optimizer]'),
+      killedScripts: document.querySelectorAll('script[type="text/lazyload"]').length
+    };
+    var el=document.getElementById('status');
+    if(el){
+      el.innerHTML='系统：'+r.platform+'<br>网店程序运行了吗：'+(r.heavyRan?'运行了':'没运行')+
+        '<br>隐形假大字：'+(r.fakeIcon||r.pagespeedDiv?'有':'没有')+
+        '<br>被停掉的程序：'+r.killedScripts+' 个';
+    }
+    console.error('REPLAY_CHECK '+JSON.stringify(r));
+  }
+  window.addEventListener('load',function(){setTimeout(report,500)});
+  setTimeout(report,15000);
+})();
+</script>
+<style>
+  #fv-loading-icon {
+    visibility: visible;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: system-ui, sans-serif;
+    font-size: 190vw;
+    line-height: 1;
+    word-wrap: break-word;
+    top: 0;
+    left: 0;
+    margin: 0;
+    text-decoration: none;
+    filter: none;
+    transition: all 0s;
+    transform: none;
+    width: 99vw;
+    height: 99vh;
+    max-width: 99vw;
+    max-height: 99vh;
+    pointer-events: none;
+    z-index: -99;
+    overflow: hidden;
+    opacity: 0.0001;
+  }
+</style>
+<div id="fv-loading-icon">🔄</div>
+<link rel="preload" href="js/preload_asset.js" as="script">
+<script src="js/preload_asset.js" type="text/javascript"></script>
+<style>.async-hide { opacity: 0 !important} </style> <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c; })(window,document.documentElement,'async-hide','dataLayer',100, {'GTM-XXXXXX':true});</script>
+<script src="js/loox_widget_1.js" type="text/javascript"></script>
+<style>
+  body { margin:0; padding:16px; font-family:-apple-system,"PingFang SC",sans-serif; background:#fff; color:#111; }
+  h1 { font-size:6vw; margin:0 0 8px; }
+  #status { font-size:5vw; font-weight:700; color:#c00; line-height:1.4; margin-bottom:12px; }
+  img { width:100%; height:auto; display:block; }
+</style>
+</head>
+<body>
+  <h1>B 页：装了卖家代码</h1>
+  <div id="status">检测中…</div>
+  <img src="hero.png" alt="网店首屏大图（模拟）" width="1600" height="1000">
+  <p>这是模拟网店首页：一张大图 + 一段会占用浏览器 2 秒的网店程序。</p>
+  <script src="heavy.js"></script>
+</body>
+</html>
