@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- 测试页：显示访问者浏览器报告的 navigator.platform，用来实测谷歌测速机器的系统 -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform Check</title>
+<style>
+  body { margin: 0; padding: 16px; font-family: -apple-system, "PingFang SC", sans-serif; background: #fff; color: #111; }
+  #platform { font-size: 14vw; font-weight: 800; line-height: 1.1; word-break: break-all; }
+  #verdict { font-size: 7vw; font-weight: 700; margin-top: 12px; }
+  .hit { color: #c00; }
+  .miss { color: #070; }
+  #ua { font-size: 3.5vw; color: #444; margin-top: 16px; word-break: break-all; }
+  #time { font-size: 3.5vw; color: #888; margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div>navigator.platform =</div>
+  <div id="platform"></div>
+  <div id="verdict"></div>
+  <div id="ua"></div>
+  <div id="time"></div>
+<script>
+  // 读取浏览器自报的系统名
+  var p = navigator.platform;
+  var ua = navigator.userAgent;
+  document.getElementById('platform').textContent = p;
+  // 和卖家代码第一行用一模一样的判断
+  var hit = (p == "Linux x86_64");
+  var v = document.getElementById('verdict');
+  v.textContent = hit ? "会触发作弊代码" : "不会触发作弊代码";
+  v.className = hit ? "hit" : "miss";
+  document.getElementById('ua').textContent = "userAgent: " + ua;
+  document.getElementById('time').textContent = new Date().toISOString();
+  // 写进控制台错误，谷歌测速的文字报告里也能看到这个值
+  console.error("PLATFORM_CHECK platform=" + p + " | trigger=" + hit + " | ua=" + ua);
+</script>
+</body>
+</html>
